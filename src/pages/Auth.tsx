@@ -50,12 +50,12 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-primary/90 to-primary/80 p-4">
-      <Card className="w-full max-w-md shadow-premium">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <Card className="w-full max-w-md shadow-xl border-2">
         <CardHeader className="space-y-4">
           <div className="flex justify-center">
-            <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center">
-              <Shield className="w-8 h-8 text-secondary-foreground" />
+            <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
+              <Shield className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
           <CardTitle className="text-2xl text-center">Usuarios Convert-IA</CardTitle>

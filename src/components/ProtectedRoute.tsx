@@ -20,7 +20,8 @@ const ProtectedRoute = ({ children, requireAdmin = false }: ProtectedRouteProps)
         navigate("/");
       }
     }
-  }, [user, isAdmin, loading, navigate, requireAdmin]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, isAdmin, loading, requireAdmin]);
 
   if (loading) {
     return (
