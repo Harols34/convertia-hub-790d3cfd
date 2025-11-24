@@ -14,16 +14,347 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      alarmas: {
+        Row: {
+          archivos_adjuntos: Json | null
+          comentarios: Json | null
+          created_at: string | null
+          descripcion: string
+          estado: string | null
+          id: string
+          prioridad: string | null
+          resuelta_at: string | null
+          resuelta_por: string | null
+          titulo: string
+          updated_at: string | null
+          usuario_final_id: string
+        }
+        Insert: {
+          archivos_adjuntos?: Json | null
+          comentarios?: Json | null
+          created_at?: string | null
+          descripcion: string
+          estado?: string | null
+          id?: string
+          prioridad?: string | null
+          resuelta_at?: string | null
+          resuelta_por?: string | null
+          titulo: string
+          updated_at?: string | null
+          usuario_final_id: string
+        }
+        Update: {
+          archivos_adjuntos?: Json | null
+          comentarios?: Json | null
+          created_at?: string | null
+          descripcion?: string
+          estado?: string | null
+          id?: string
+          prioridad?: string | null
+          resuelta_at?: string | null
+          resuelta_por?: string | null
+          titulo?: string
+          updated_at?: string | null
+          usuario_final_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alarmas_usuario_final_id_fkey"
+            columns: ["usuario_final_id"]
+            isOneToOne: false
+            referencedRelation: "usuarios_finales"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      aplicativos_empresa: {
+        Row: {
+          activo: boolean | null
+          campos_personalizados: Json | null
+          created_at: string | null
+          descripcion: string | null
+          empresa_id: string
+          icono: string | null
+          id: string
+          nombre: string
+          updated_at: string | null
+        }
+        Insert: {
+          activo?: boolean | null
+          campos_personalizados?: Json | null
+          created_at?: string | null
+          descripcion?: string | null
+          empresa_id: string
+          icono?: string | null
+          id?: string
+          nombre: string
+          updated_at?: string | null
+        }
+        Update: {
+          activo?: boolean | null
+          campos_personalizados?: Json | null
+          created_at?: string | null
+          descripcion?: string | null
+          empresa_id?: string
+          icono?: string | null
+          id?: string
+          nombre?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "aplicativos_empresa_empresa_id_fkey"
+            columns: ["empresa_id"]
+            isOneToOne: false
+            referencedRelation: "empresas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      aplicativos_globales: {
+        Row: {
+          activo: boolean | null
+          campos_requeridos: Json | null
+          created_at: string | null
+          descripcion: string | null
+          icono: string | null
+          id: string
+          nombre: string
+          updated_at: string | null
+        }
+        Insert: {
+          activo?: boolean | null
+          campos_requeridos?: Json | null
+          created_at?: string | null
+          descripcion?: string | null
+          icono?: string | null
+          id?: string
+          nombre: string
+          updated_at?: string | null
+        }
+        Update: {
+          activo?: boolean | null
+          campos_requeridos?: Json | null
+          created_at?: string | null
+          descripcion?: string | null
+          icono?: string | null
+          id?: string
+          nombre?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      asignaciones_aplicativos: {
+        Row: {
+          aplicativo_empresa_id: string | null
+          aplicativo_global_id: string | null
+          created_at: string | null
+          datos_acceso: Json | null
+          id: string
+          notas: string | null
+          updated_at: string | null
+          usuario_final_id: string
+        }
+        Insert: {
+          aplicativo_empresa_id?: string | null
+          aplicativo_global_id?: string | null
+          created_at?: string | null
+          datos_acceso?: Json | null
+          id?: string
+          notas?: string | null
+          updated_at?: string | null
+          usuario_final_id: string
+        }
+        Update: {
+          aplicativo_empresa_id?: string | null
+          aplicativo_global_id?: string | null
+          created_at?: string | null
+          datos_acceso?: Json | null
+          id?: string
+          notas?: string | null
+          updated_at?: string | null
+          usuario_final_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asignaciones_aplicativos_aplicativo_empresa_id_fkey"
+            columns: ["aplicativo_empresa_id"]
+            isOneToOne: false
+            referencedRelation: "aplicativos_empresa"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asignaciones_aplicativos_aplicativo_global_id_fkey"
+            columns: ["aplicativo_global_id"]
+            isOneToOne: false
+            referencedRelation: "aplicativos_globales"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asignaciones_aplicativos_usuario_final_id_fkey"
+            columns: ["usuario_final_id"]
+            isOneToOne: false
+            referencedRelation: "usuarios_finales"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      empresas: {
+        Row: {
+          activa: boolean | null
+          created_at: string | null
+          direccion: string | null
+          email: string | null
+          id: string
+          nit: string | null
+          nombre: string
+          telefono: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          activa?: boolean | null
+          created_at?: string | null
+          direccion?: string | null
+          email?: string | null
+          id?: string
+          nit?: string | null
+          nombre: string
+          telefono?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          activa?: boolean | null
+          created_at?: string | null
+          direccion?: string | null
+          email?: string | null
+          id?: string
+          nit?: string | null
+          nombre?: string
+          telefono?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      historial_cambios: {
+        Row: {
+          accion: string
+          admin_user_id: string | null
+          created_at: string | null
+          datos_anteriores: Json | null
+          datos_nuevos: Json | null
+          id: string
+          registro_id: string
+          tabla: string
+        }
+        Insert: {
+          accion: string
+          admin_user_id?: string | null
+          created_at?: string | null
+          datos_anteriores?: Json | null
+          datos_nuevos?: Json | null
+          id?: string
+          registro_id: string
+          tabla: string
+        }
+        Update: {
+          accion?: string
+          admin_user_id?: string | null
+          created_at?: string | null
+          datos_anteriores?: Json | null
+          datos_nuevos?: Json | null
+          id?: string
+          registro_id?: string
+          tabla?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      usuarios_finales: {
+        Row: {
+          activo: boolean | null
+          celular: string | null
+          codigo_unico: string | null
+          created_at: string | null
+          datos_adicionales: Json | null
+          email: string | null
+          empresa_id: string
+          id: string
+          nombre_completo: string
+          numero_documento: string
+          updated_at: string | null
+        }
+        Insert: {
+          activo?: boolean | null
+          celular?: string | null
+          codigo_unico?: string | null
+          created_at?: string | null
+          datos_adicionales?: Json | null
+          email?: string | null
+          empresa_id: string
+          id?: string
+          nombre_completo: string
+          numero_documento: string
+          updated_at?: string | null
+        }
+        Update: {
+          activo?: boolean | null
+          celular?: string | null
+          codigo_unico?: string | null
+          created_at?: string | null
+          datos_adicionales?: Json | null
+          email?: string | null
+          empresa_id?: string
+          id?: string
+          nombre_completo?: string
+          numero_documento?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "usuarios_finales_empresa_id_fkey"
+            columns: ["empresa_id"]
+            isOneToOne: false
+            referencedRelation: "empresas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +481,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
