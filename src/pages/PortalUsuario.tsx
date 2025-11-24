@@ -65,17 +65,17 @@ const PortalUsuario = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-primary/90 to-primary/80">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto space-y-6 animate-slide-up">
-          <div className="text-center text-white mb-8">
+          <div className="text-center mb-8">
             <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center shadow-premium">
-                <Shield className="w-10 h-10 text-secondary-foreground" />
+              <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
+                <Shield className="w-10 h-10 text-primary-foreground" />
               </div>
             </div>
             <h1 className="text-4xl font-bold mb-2">Busca tu Info</h1>
-            <p className="text-white/90">
+            <p className="text-muted-foreground">
               Ingresa tu código único para acceder a tus aplicativos
             </p>
           </div>
