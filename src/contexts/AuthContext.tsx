@@ -34,39 +34,52 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
+
     // Set up auth state listener
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!mounted) return;
+      
       setSession(session);
       setUser(session?.user ?? null);
 
       // Check admin role when user changes
       if (session?.user) {
-        setTimeout(() => {
-          checkAdminRole(session.user.id).then(setIsAdmin);
-        }, 0);
+        const isAdminUser = await checkAdminRole(session.user.id);
+        if (mounted) {
+          setIsAdmin(isAdminUser);
+          setLoading(false);
+        }
       } else {
         setIsAdmin(false);
+        setLoading(false);
       }
     });
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!mounted) return;
+      
       setSession(session);
       setUser(session?.user ?? null);
 
       if (session?.user) {
-        checkAdminRole(session.user.id).then((isAdmin) => {
-          setIsAdmin(isAdmin);
+        const isAdminUser = await checkAdminRole(session.user.id);
+        if (mounted) {
+          setIsAdmin(isAdminUser);
           setLoading(false);
-        });
+        }
       } else {
         setLoading(false);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   return (
