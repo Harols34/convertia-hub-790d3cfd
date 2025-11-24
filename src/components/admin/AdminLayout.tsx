@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { signOut } from "@/lib/auth";
@@ -21,6 +21,7 @@ interface AdminLayoutProps {
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
 
   const handleSignOut = async () => {
@@ -47,7 +48,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div className="min-h-screen bg-background">
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-card border-r border-border">
+      <aside className="fixed left-0 top-0 h-full w-64 bg-card border-r border-border shadow-lg">
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
@@ -64,7 +65,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           {menuItems.map((item) => (
             <Button
               key={item.path}
-              variant={location.pathname === item.path ? "secondary" : "ghost"}
+              variant={location.pathname === item.path ? "default" : "ghost"}
               className="w-full justify-start"
               onClick={() => navigate(item.path)}
             >
@@ -74,7 +75,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           ))}
         </nav>
 
-        <div className="absolute bottom-0 w-full p-4 border-t border-border">
+        <div className="absolute bottom-0 w-full p-4 border-t border-border bg-card">
           <div className="p-3 bg-muted rounded-lg mb-3">
             <p className="text-sm font-medium truncate">{user?.email}</p>
             <p className="text-xs text-muted-foreground">Administrador</p>
