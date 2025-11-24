@@ -199,6 +199,33 @@ export type Database = {
           },
         ]
       }
+      configuracion_sistema: {
+        Row: {
+          clave: string
+          created_at: string | null
+          descripcion: string | null
+          id: string
+          updated_at: string | null
+          valor: Json
+        }
+        Insert: {
+          clave: string
+          created_at?: string | null
+          descripcion?: string | null
+          id?: string
+          updated_at?: string | null
+          valor: Json
+        }
+        Update: {
+          clave?: string
+          created_at?: string | null
+          descripcion?: string | null
+          id?: string
+          updated_at?: string | null
+          valor?: Json
+        }
+        Relationships: []
+      }
       empresas: {
         Row: {
           activa: boolean | null
@@ -344,6 +371,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generar_codigo_unico: {
+        Args: { p_nombre_completo: string; p_numero_documento: string }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
